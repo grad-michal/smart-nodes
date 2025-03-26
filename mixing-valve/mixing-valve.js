@@ -259,6 +259,11 @@ module.exports = function (RED)
                0, node_settings.max_change_percent
             );
 
+            if(moving_time < 500)
+            {
+                moving_time = 500;
+            }
+
             // calculate direction
             let adjustAction = ADJUST_CLOSE;
             if (current_temperature < node_settings.setpoint)
