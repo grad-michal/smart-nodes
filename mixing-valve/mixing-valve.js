@@ -33,7 +33,8 @@ module.exports = function (RED)
             precision: config.precision || 1,
             max_change_percent: config.max_change_percent || 2,
             max_change_temp_difference: config.max_change_temp_difference || 20,
-            last_position: null
+            last_position: null,
+            min_change_time: config.min_change_time || 0
         }, smart_context.get(node.id));
 
 
@@ -259,9 +260,9 @@ module.exports = function (RED)
                0, node_settings.max_change_percent
             );
 
-            if(moving_time < 500)
+            if(moving_time < node_settings.min_change_time)
             {
-                moving_time = 500;
+                moving_time = node_settings.min_change_time;
             }
 
             // calculate direction
